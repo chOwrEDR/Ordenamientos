@@ -1,0 +1,52 @@
+#include <iostream>
+#include <string>
+#include <list>
+#include <algorithm>
+
+class Solicitud {
+public:
+    std::string nombre;
+    std::string carrera;
+    std::string preparatoria;
+    double promedio;
+
+    Solicitud(std::string nombre, std::string carrera, std::string preparatoria, double promedio) :
+        nombre(nombre), carrera(carrera), preparatoria(preparatoria), promedio(promedio) {}
+};
+
+class Lista {
+public:
+    std::list<Solicitud> solicitudes;
+
+    void agregarSolicitud(Solicitud solicitud) {
+        solicitudes.push_back(solicitud);
+        solicitudes.sort( {
+            return a.promedio > b.promedio;
+        });
+    }
+
+    void buscarSolicitud(std::string nombre) {
+        auto it = std::find_if(solicitudes.begin(), solicitudes.end(), & {
+            return solicitud.nombre == nombre;
+        });
+
+        if (it != solicitudes.end()) {
+            std::cout << "Nombre: " << it->nombre << "\n";
+            std::cout << "Carrera: " << it->carrera << "\n";
+            std::cout << "Preparatoria: " << it->preparatoria << "\n";
+            std::cout << "Promedio: " << it->promedio << "\n";
+            std::cout << "Posición: " << std::distance(solicitudes.begin(), it) + 1 << "\n";
+        } else {
+            std::cout << "La solicitud no se encuentra. Por favor, da de alta una solicitud.\n";
+        }
+    }
+};
+
+int main() {
+    Lista lista;
+    // Agregar solicitudes a la lista
+    // lista.agregarSolicitud(Solicitud("Nombre", "Carrera", "Preparatoria", promedio));
+    // Buscar una solicitud
+    // lista.buscarSolicitud("Nombre");
+    return 0;
+}
